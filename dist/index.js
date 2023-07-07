@@ -73,19 +73,19 @@ async function run() {
           console.log(`👻 Skipped '${workflow.name}' workflow run ${run.id}: it is in '${run.status}' state`);
           continue;
         }
- 
+
         if (check_pullrequest_exist && run.pull_requests.length > 0) {
           console.log(` Skipping '${workflow.name}' workflow run ${run.id} because PR is attached.`);
           continue;
         }
 
-        if (check_branch_existence && branchNames.indexOf(run.head_branch) === 1 ) {
+        if (check_branch_existence && branchNames.indexOf(run.head_branch) === 1) {
           console.log(` Skipping '${workflow.name}' workflow run ${run.id} because branch is still active.`);
           continue;
         }
 
         if (delete_run_by_conclusion_pattern && delete_run_by_conclusion_pattern.toLowerCase() !== "all"
-            && run.conclusion.indexOf(delete_run_by_conclusion_pattern) === -1  ) {
+          && run.conclusion.indexOf(delete_run_by_conclusion_pattern) === -1) {
           core.debug(`  Skipping '${workflow.name}' workflow run ${run.id} because conclusion was ${run.conclusion}`);
           continue;
         }
